@@ -10,4 +10,6 @@ class Settings(BaseSettings):
 
     max_upload_size_bytes: int = 1024 * 1024 * 5 # 5MB
 
+    posts_per_page: int = 10
+
 settings = Settings() # Loaded from .env file
