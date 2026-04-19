@@ -5,19 +5,17 @@ from fastapi.security import OAuth2PasswordBearer
 from pwdlib import PasswordHash 
 from config import settings
 
-password_hasher = PasswordHash.recommended()
+password_hash = PasswordHash.recommended()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/users/token")
 
 def hash_password(password: str) -> str:
-    return password_hasher.hash(password)
+    return password_hash.hash(password)
+
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    print(f"plain_password: {plain_password}")
-    print(f"hashed_password: {hashed_password}")
-    return password_hasher.verify(hashed_password, plain_password)
+    return password_hash.verify(plain_password, hashed_password)
 
-## create_access_token
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
     """Create a JWT access token."""
     to_encode = data.copy()
